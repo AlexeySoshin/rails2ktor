@@ -1,6 +1,9 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.61"
-    id("application")
+    application
 }
 
 
@@ -16,7 +19,15 @@ application {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testCompile("org.junit.jupiter:junit-jupiter-engine:5.6.0")
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testImplementation("io.ktor:ktor-server-core:1.3.0")
 }
 
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
