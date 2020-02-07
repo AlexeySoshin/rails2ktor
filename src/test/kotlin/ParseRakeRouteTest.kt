@@ -7,15 +7,15 @@ class ParseRakeRouteTest {
 
     @Test
     fun `route with prefix`() {
-        val route = parseRakeRoute("   health GET    /health(.:format)                   health#show       ")
+        val route = parseRakeRoute("   edit_article GET    /articles/:id/edit(.:format)   articles#edit  ")
 
-        assertEquals(Route(HttpMethod.Get,"/health", "health#show"), route)
+        assertEquals(Route(HttpMethod.Get,"/articles/:id/edit", "articles#edit"), route)
     }
 
     @Test
     fun `route without prefix`() {
-        val route = parseRakeRoute("          PUT    /api/v1/:cat_id/status(.:format)    api/v1/cat#status")
+        val route = parseRakeRoute("                PATCH  /articles/:id(.:format)        articles#update")
 
-        assertEquals(Route(HttpMethod.Put, "/api/v1/:cat_id/status", "api/v1/cat#status"), route)
+        assertEquals(Route(HttpMethod.Patch, "/articles/:id", "articles#update"), route)
     }
 }
