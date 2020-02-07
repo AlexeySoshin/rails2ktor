@@ -2,8 +2,8 @@ import io.ktor.http.HttpMethod
 import java.nio.file.Paths
 import kotlin.streams.toList
 
-class RoutesConverter(private val pathToRailsProject: String) {
-    fun convert(): List<Route> {
+class RailsRoutesParser {
+    fun parse(pathToRailsProject: String): List<Route> {
         // Run rake on pathToRailsProject
         // Capture the output
         val rakeOutput = runRake(pathToRailsProject)

@@ -2,11 +2,11 @@ import io.ktor.http.HttpMethod
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class RoutesConverterTest {
+class RailsRoutesParserTest {
 
     @Test
-    fun `does nothing`() {
-        val routes = RoutesConverter("./src/test/resources/blog").convert()
+    fun `parses routes of a project`() {
+        val routes = RailsRoutesParser().parse("./src/test/resources/blog")
 
         assertTrue(routes.contains(Route(HttpMethod.Get, "/welcome/index", "welcome#index")))
     }

@@ -4,5 +4,5 @@ fun main(vararg args: String) {
         "Usage: rails2ktor <path-to-routes.rb>"
     }
 
-    RoutesConverter(args[0]).convert()
+    RailsRoutesParser().parse(args[0])
 }
