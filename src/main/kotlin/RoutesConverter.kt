@@ -1,39 +1,51 @@
-import java.nio.file.Paths
 import io.ktor.http.HttpMethod
-import java.util.*
+import java.nio.file.Paths
 import kotlin.streams.toList
 
 class RoutesConverter(private val pathToRailsProject: String) {
-    fun convert(): List<String> {
+    fun convert(): List<Route> {
         // Run rake on pathToRailsProject
         // Capture the output
         val rakeOutput = runRake(pathToRailsProject)
         // Skip header
+        val routes = filterRoutes(rakeOutput)
         // For each line parse into Route
         // Allow skipping Rails/Sidekiq paths?
 
-       return convert(Paths.get(pathToRailsProject).toFile().readLines())
+        return routes.map {
+            parseRakeRoute(it)
+        }
     }
-
-    private fun convert(routeLines: List<String>): List<String> {
-        return routeLines
-    }
-
 }
 
+/**
+ * Filters `rake routes` output from noisy gems and header
+ */
+fun filterRoutes(rakeOutput: List<String>): List<String> {
+    val headerIndex = rakeOutput.indexOfFirst {
+        it.contains("Prefix Verb   URI Pattern")
+    }
+
+    return rakeOutput.subList(headerIndex + 1, rakeOutput.size)
+}
+
+
+/**
+ * Runs `rake routes` on a specified Ruby project directory and returns the output
+ */
 fun runRake(pathToRailsProject: String): List<String> {
     val directory = Paths.get(pathToRailsProject).toAbsolutePath().toFile()
-    if (!directory.exists()) {
-        throw RuntimeException("Directory $pathToRailsProject doesn't exist")
-    }
-    if (!directory.isDirectory) {
-        throw RuntimeException("Not a directory: $pathToRailsProject")
-    }
-    val process = ProcessBuilder("rake", "routes")
+
+    // bash --login will apply any RVM configurations user has
+    val process = ProcessBuilder("bash", "--login", "-c", "rake routes")
             .directory(directory)
             .start()
 
-    // TODO handle error stream?
+    process.waitFor()
+    val errors = process.errorStream.bufferedReader().lines().toList()
+    if (errors.isNotEmpty()) {
+//        throw RuntimeException("Error running rake: ${errors.joinToString()}")
+    }
 
     return process.inputStream.bufferedReader().lines().toList()
 }
