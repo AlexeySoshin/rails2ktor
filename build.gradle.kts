@@ -19,9 +19,9 @@ application {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("io.ktor:ktor-server-core:1.3.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.6.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testImplementation("io.ktor:ktor-server-core:1.3.0")
 }
 
 tasks.withType<KotlinCompile>().configureEach {
