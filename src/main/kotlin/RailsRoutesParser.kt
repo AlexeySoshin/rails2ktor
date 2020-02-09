@@ -3,17 +3,19 @@ import java.nio.file.Paths
 import kotlin.streams.toList
 
 class RailsRoutesParser {
-    fun parse(pathToRailsProject: String): List<Route> {
-        // Run rake on pathToRailsProject
-        // Capture the output
-        val rakeOutput = runRake(pathToRailsProject)
-        // Skip header
-        val routes = filterRoutes(rakeOutput)
-        // For each line parse into Route
-        // Allow skipping Rails/Sidekiq paths?
+    companion object {
+        fun parse(pathToRailsProject: String): List<Route> {
+            // Run rake on pathToRailsProject
+            // Capture the output
+            val rakeOutput = runRake(pathToRailsProject)
+            // Skip header
+            val routes = filterRoutes(rakeOutput)
+            // For each line parse into Route
+            // Allow skipping Rails/Sidekiq paths?
 
-        return routes.map {
-            parseRakeRoute(it)
+            return routes.map {
+                parseRakeRoute(it)
+            }
         }
     }
 }

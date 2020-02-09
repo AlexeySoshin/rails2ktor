@@ -4,5 +4,5 @@ fun main(vararg args: String) {
         "Usage: rails2ktor <path-to-routes.rb>"
     }
 
-    RailsRoutesParser().parse(args[0])
+    KtorRoutesGenerator.generate(RailsRoutesParser.parse(args[0]))
 }

@@ -11,8 +11,7 @@ data class Route(val method: HttpMethod, val path: String, val controller: Strin
         }
         val method = method.value.toLowerCase()
         return """
-            $method("${split.joinToString("/")}") {
-            }
+            $method("${split.joinToString("/")}") { }
         """.trimIndent()
     }
 

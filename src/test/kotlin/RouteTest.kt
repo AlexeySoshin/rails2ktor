@@ -9,8 +9,7 @@ class RouteTest {
         val route = Route(method= HttpMethod.Get, path="/articles/:id/edit", controller="articles#edit")
 
         assertEquals("""
-            get("/articles/{id}/edit") {
-            }
+            get("/articles/{id}/edit") { }
         """.trimIndent(), route.asKtor())
     }
 }
