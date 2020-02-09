@@ -1,3 +1,5 @@
+package routes
+
 import io.ktor.http.HttpMethod
 import java.nio.file.Paths
 import kotlin.streams.toList
@@ -10,7 +12,7 @@ class RailsRoutesParser {
             val rakeOutput = runRake(pathToRailsProject)
             // Skip header
             val routes = filterRoutes(rakeOutput)
-            // For each line parse into Route
+            // For each line parse into routes.Route
             // Allow skipping Rails/Sidekiq paths?
 
             return routes.map {

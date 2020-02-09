@@ -1,3 +1,5 @@
+package routes
+
 import io.ktor.http.HttpMethod
 
 data class Route(val method: HttpMethod, val path: String, val controller: String) {

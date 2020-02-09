@@ -1,3 +1,5 @@
+import routes.KtorRoutesGenerator
+import routes.RailsRoutesParser
 
 fun main(vararg args: String) {
     require(args.isNotEmpty()) {

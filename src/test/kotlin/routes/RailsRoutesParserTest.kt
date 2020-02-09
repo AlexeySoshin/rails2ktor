@@ -1,6 +1,9 @@
+package routes
+
 import io.ktor.http.HttpMethod
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import routes.RailsRoutesParser
 
 class RailsRoutesParserTest {
 

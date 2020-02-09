@@ -1,3 +1,5 @@
+package routes
+
 class KtorRoutesGenerator {
     companion object {
         fun generate(routes: List<Route>): String {
