@@ -5,7 +5,8 @@ class KtorRoutesGenerator {
         fun generate(routes: List<Route>): String {
             return """
             routing {
-            ${routes.joinToString("\n") { "\t\t" + it.asKtor() }}
+            ${routes.joinToString("\n") { it.asKtor()
+                    .replace("{ }", "{ call.proxy(target) }") }}
             }
         """.trimIndent()
         }

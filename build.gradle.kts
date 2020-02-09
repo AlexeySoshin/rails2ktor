@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.61"

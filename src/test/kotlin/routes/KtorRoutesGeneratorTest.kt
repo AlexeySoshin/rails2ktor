@@ -11,9 +11,9 @@ class KtorRoutesGeneratorTest {
         val routes = listOf(Route(method = HttpMethod.Get, path = "/", controller = "welcome#index"),
                 Route(method = HttpMethod.Post, path = "/articles", controller = "articles#create"))
 
-        assertEquals("""          routing {
-          		get("/") { }
-post("/articles") { }
-          }""".trimIndent(), KtorRoutesGenerator.generate(routes))
+        assertEquals("""            routing {
+            get("/") { call.proxy(target) }
+post("/articles") { call.proxy(target) }
+            }""".trimIndent(), KtorRoutesGenerator.generate(routes))
     }
 }
