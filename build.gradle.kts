@@ -20,8 +20,11 @@ application {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.ktor:ktor-server-core:1.3.0")
+    implementation("io.ktor:ktor-client-apache:1.3.0")
+    implementation("io.ktor:ktor-server-netty:1.3.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.6.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
 }
 
 // Puts all libraries into the same JAR
