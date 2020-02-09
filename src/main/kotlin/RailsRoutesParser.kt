@@ -50,7 +50,6 @@ fun runRake(pathToRailsProject: String): List<String> {
     return process.inputStream.bufferedReader().lines().toList()
 }
 
-
 private val multipleSpaces = Regex("(\\s)+")
 
 /**
@@ -73,4 +72,3 @@ fun parseRakeRoute(routeLine: String): Route {
     return Route(method, path, split[startIndex++])
 }
 
-data class Route(val method: HttpMethod, val path: String, val controller: String)
