@@ -24,6 +24,18 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
 }
 
+// Puts all libraries into the same JAR
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "MainKt"
+    }
+    configurations.runtimeClasspath.filter {
+        it.name.endsWith(".jar")
+    }.forEach {
+        from(zipTree(it))
+    }
+}
+
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions.jvmTarget = "1.8"
 }
