@@ -5,7 +5,7 @@ import io.ktor.http.HttpMethod
 data class Route(val method: HttpMethod, val path: String, val controller: String) {
 
     /**
-     * Returns a string representaing Ktor route
+     * Returns a string representing Ktor route
      */
     fun asKtor(): String {
         val split = path.split("/").map {

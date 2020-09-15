@@ -50,7 +50,7 @@ fun runRake(pathToRailsProject: String): List<String> {
     process.waitFor()
     val errors = process.errorStream.bufferedReader().lines().toList()
     if (errors.isNotEmpty()) {
-        throw RuntimeException("Error running rake: ${errors.joinToString()}")
+        System.err.println("Error running rake: ${errors.joinToString()}")
     }
 
     return process.inputStream.bufferedReader().lines().toList()
