@@ -18,6 +18,8 @@ class RailsRoutesParser {
             return routes.map {
                 parseRakeRoute(it)
             }
+                    .filterNot { it.path.startsWith("/rails") }
+                    .filterNot { it.method == HttpMethod("sidekiq") }
         }
     }
 }
@@ -48,7 +50,7 @@ fun runRake(pathToRailsProject: String): List<String> {
     process.waitFor()
     val errors = process.errorStream.bufferedReader().lines().toList()
     if (errors.isNotEmpty()) {
-//        throw RuntimeException("Error running rake: ${errors.joinToString()}")
+        throw RuntimeException("Error running rake: ${errors.joinToString()}")
     }
 
     return process.inputStream.bufferedReader().lines().toList()
@@ -73,6 +75,6 @@ fun parseRakeRoute(routeLine: String): Route {
 
     val method = HttpMethod.parse(split[startIndex++])
     val path = split[startIndex++].replace("(.:format)", "")
-    return Route(method, path, split[startIndex++])
+    return Route(method, path, split[startIndex])
 }
 
