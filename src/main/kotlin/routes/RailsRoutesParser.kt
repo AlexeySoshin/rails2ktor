@@ -41,7 +41,7 @@ fun runRake(pathToRailsProject: String): List<String> {
     val directory = Paths.get(pathToRailsProject).toAbsolutePath().toFile()
 
     // bash --login will apply any RVM configurations user has
-    val process = ProcessBuilder("bash", "--login", "-c", "rake routes")
+    val process = ProcessBuilder("bash", "--login", "-c", "bundle install && rake routes")
             .directory(directory)
             .start()
 
