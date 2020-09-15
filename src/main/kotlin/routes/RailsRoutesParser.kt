@@ -11,7 +11,7 @@ class RailsRoutesParser {
             // Capture the output
             val rakeOutput = runRake(pathToRailsProject)
             // Skip header
-            val routes = filterRoutes(rakeOutput)
+            val routes = skipHeader(rakeOutput)
             // For each line parse into routes.Route
             // Allow skipping Rails/Sidekiq paths?
 
@@ -25,7 +25,7 @@ class RailsRoutesParser {
 /**
  * Filters `rake routes` output from noisy gems and header
  */
-fun filterRoutes(rakeOutput: List<String>): List<String> {
+fun skipHeader(rakeOutput: List<String>): List<String> {
     val headerIndex = rakeOutput.indexOfFirst {
         it.contains("Prefix Verb   URI Pattern")
     }
